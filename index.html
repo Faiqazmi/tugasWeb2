@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang=”en”>
+
+<head>
+    <meta charset=”utf-8”>
+    <meta http-equiv=”X-UA-Compatible” content=”IE=edge”>
+
+    <title>TugasWebEdmodo2</title>
+
+    <script>
+        function fn() {
+
+            var ai = (document.kirim.harga_beras.value);
+            var bi = (document.kirim.harga_gula.value);
+            var ci = (document.kirim.harga_minyak.value);
+            var a = (document.kirim.quantity_beras.value);
+            var b = (document.kirim.quantity_gula.value);
+            var c = (document.kirim.quantity_minyak.value);
+            var dicount = 0;
+            var total_akhir = 0;
+
+            var d = parseInt(a * ai) + parseInt(b * bi) + parseInt(c * ci);
+
+            var total_harga1 = parseInt(d);
+            var total_awal = (document.kirim.total_harga.value = total_harga1);
+
+
+            if (total_awal >= 100000) {
+
+                if (document.kirim.member.checked == true) {
+                    discount = (20 / 100) * total_awal;
+                    // 20 karena mendapat diskon member dan diskon total belanja lebih dari Rp.100.000,00
+                } else {
+                    discount = (10 / 100) * total_awal;
+                }
+            } else {
+                if (document.kirim.member.checked == true) {
+                    discount = (10 / 100) * total_awal;
+                } else {
+                    discount = 0;;
+                }
+            }
+            total_akhir = total_awal - discount;
+
+            document.kirim.discount.value = eval(discount);
+            document.kirim.total_bayar.value = eval(total_akhir);
+        }
+    </script>
+</head>
+
+<body>
+    <form method="get" , name="kirim" , onchange="fn()">
+        <table border="10">
+            <tr>
+                <th>No</th>
+                <th>Nama Barang</th>
+                <th>Harga Barang</th>
+                <th>Quantity</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Beras</td>
+                <td>Rp.<input type="text" , name="harga_beras" disabled value="12000"></td>
+                <td><input type="text" , name="quantity_beras" onmouseover="fn()"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Gula</td>
+                <td>Rp.<input type="text" , name="harga_gula" disabled value="14000"></td>
+                <td><input type="text" , name="quantity_gula" onmouseover="fn()"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Minyak Goreng</td>
+                <td>Rp.<input type="text" , name="harga_minyak" disabled value="10000"></td>
+                <td><input type="text" , name="quantity_minyak" onmouseover="fn()"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Harga Total </td>
+                <td><input type="text" , name="total_harga" disabled onmouseover="fn()"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Member </td>
+                <td>
+                    <input type="checkbox" name="member" id="y">Ya
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">Diskon </td>
+                <td><input type="text" , name="discount" disabled onmouseover="fn()"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Total Bayar </td>
+                <td><input type="text" , name="total_bayar" disabled onmouseover="fn()"></td>
+            </tr>
+            <tr>
+                <td colspan="3" rowspan="2"> </td>
+                <td colspan="3">
+                    <input type="reset" value="Reset Daftar"></td>
+            </tr>
+
+            <p>Ket : Jika total belanja lebih dari Rp.100.000, maka akan mendapatkan diskon sebesar 10%</p>
+    </form>
+</body>
+
+</html>
